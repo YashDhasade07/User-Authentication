@@ -28,7 +28,7 @@ export const loginPage = (req, res) => {
 
 // Rendering the reset password page
 export const resetPage = (req, res) => {
-  return res.render('reset_Password');
+  return res.render('reset_password');
 };
 
 // Signup function
