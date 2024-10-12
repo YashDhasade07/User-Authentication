@@ -79,14 +79,14 @@ export const reset = async (req, res) => {
     }
 
     // Check if the current password matches
-    if (user.password !== oldPassword) {
+     if (!(await bcrypt.compare(oldPassword, user.password))) {
       req.flash('error', 'Current password does not match');
       console.log('Current password does not match');
       return res.redirect('/reset');
     }
-
+    const hashedPassword =await bcrypt.hash(newPassword,12)
     // Update the password
-    user.password = newPassword;
+    user.password = hashedPassword;
     await user.save();
 
     req.flash('success', 'Password updated successfully');
